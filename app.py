@@ -3,28 +3,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# ==========================================
 # PAGE CONFIGURATION
-# ==========================================
-
 st.set_page_config(
     page_title="Netflix Dashboard",
     page_icon="🎬",
     layout="wide"
 )
 
-# ==========================================
 # TITLE
-# ==========================================
-
 st.title("🎬 Netflix Interactive Dashboard")
 
-st.markdown("Analyze Netflix Movies and TV Shows using interactive visualizations.")
 
-# ==========================================
 # SIDEBAR
-# ==========================================
-
 st.sidebar.header("Upload Dataset")
 
 uploaded_file = st.sidebar.file_uploader(
@@ -32,26 +22,17 @@ uploaded_file = st.sidebar.file_uploader(
     type=["csv"]
 )
 
-# ==========================================
 # LOAD DATASET
-# ==========================================
-
 if uploaded_file is not None:
 
     df = pd.read_csv(uploaded_file)
 
-    # ==========================================
     # DATA PREVIEW
-    # ==========================================
-
     st.subheader("📄 Dataset Preview")
 
     st.dataframe(df.head())
 
-    # ==========================================
     # DATASET METRICS
-    # ==========================================
-
     st.subheader("📊 Dataset Overview")
 
     col1, col2, col3 = st.columns(3)
@@ -60,10 +41,7 @@ if uploaded_file is not None:
     col2.metric("Columns", df.shape[1])
     col3.metric("Missing Values", df.isnull().sum().sum())
 
-    # ==========================================
     # MOVIES VS TV SHOWS
-    # ==========================================
-
     st.subheader("🎥 Movies vs TV Shows")
 
     fig1, ax1 = plt.subplots()
@@ -76,10 +54,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig1)
 
-    # ==========================================
     # RELEASE YEAR TREND
-    # ==========================================
-
     st.subheader("📈 Content Release Trend")
 
     fig2, ax2 = plt.subplots(figsize=(10,5))
@@ -91,10 +66,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig2)
 
-    # ==========================================
     # TOP 10 COUNTRIES
-    # ==========================================
-
     st.subheader("🌍 Top 10 Countries")
 
     fig3, ax3 = plt.subplots(figsize=(10,5))
@@ -106,10 +78,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig3)
 
-    # ==========================================
     # RATING DISTRIBUTION
-    # ==========================================
-
     st.subheader("⭐ Rating Distribution")
 
     fig4, ax4 = plt.subplots(figsize=(10,5))
@@ -123,10 +92,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig4)
 
-    # ==========================================
     # GENRE ANALYSIS
-    # ==========================================
-
     st.subheader("🎭 Top Genres")
 
     genres = df['listed_in'].str.split(',', expand=True).stack()
@@ -140,10 +106,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig5)
 
-    # ==========================================
     # FINAL INSIGHTS
-    # ==========================================
-
     st.subheader("🔍 Key Insights")
 
     st.write("""
@@ -154,10 +117,7 @@ if uploaded_file is not None:
     - Drama and International Movies are among the top genres.
     """)
 
-    # ==========================================
     # SUCCESS MESSAGE
-    # ==========================================
-
     st.success("Dashboard Loaded Successfully!")
 
 else:
